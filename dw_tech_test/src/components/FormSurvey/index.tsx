@@ -1,11 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type FormSurveyProps = {
     onSubmit: (data: { notes: string }) => void;
+    editingSurvey: Survey | null; // Accept editingSurvey prop
 };
 
-const FormSurvey = ({ onSubmit }: FormSurveyProps) => {
+const FormSurvey = ({ onSubmit, editingSurvey }: FormSurveyProps) => {
     const [notes, setNotes] = useState('');
+
+    useEffect(() => {
+        if (editingSurvey) {
+            setNotes(editingSurvey.notes || '');
+        } else {
+            setNotes('');
+        }
+    }, [editingSurvey]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -23,11 +32,11 @@ const FormSurvey = ({ onSubmit }: FormSurveyProps) => {
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     required
+                    className="responsive-textarea"
                     rows={5}
-                    cols={50}
                 /> <br />
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit">{editingSurvey ? 'Update' : 'Submit'}</button>
         </form>
     );
 };
