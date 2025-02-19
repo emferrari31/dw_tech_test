@@ -8,7 +8,6 @@ type Survey = {
     id: string;
     created_at: string;
     notes: string | null;
-    date: string;
 };
 
 function App() {
@@ -46,7 +45,6 @@ function App() {
             },
             body: JSON.stringify({
                 notes: data.notes,
-                date: data.date,
             }),
         });
 
@@ -55,7 +53,6 @@ function App() {
                 id: Date.now().toString(),
                 created_at: new Date().toISOString(),
                 notes: data.notes,
-                date: data.date
             };
 
             setSurveys((prevSurveys) => [...prevSurveys, newSurvey]);
