@@ -4,15 +4,12 @@ This is a simple survey application built with React, TypeScript and a Supabase 
 Users can submit new survey notes, as well as view and edit previous submissions. 
 
 ## Installation 
-1. Clone the repository 
+1. Clone the repository:
 ```js
 git clone https://github.com/emferrari31/survey-app.git
 cd survey-app
 ```
-2. Install dependencies:
-
-
-4. Run the following command to install all necessary dependencies: 
+2. Install dependencies: Run the following command to install all necessary dependencies: 
 ```js
 npm install
 ```
@@ -40,3 +37,4 @@ organised better. Pagination would be something I'd look into to manage large qu
 secure.
 - Feature - Ability to delete submissions 
 - Writing tests 
+
