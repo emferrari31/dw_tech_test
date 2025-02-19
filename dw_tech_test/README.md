@@ -27,12 +27,12 @@ The application should now be running on http://localhost:3000. Open this URL in
 
 ## Future Improvements 
 If I had more time on the project I would make the following adjustments: 
--> Organise my code into better, reusable components. I had all intentions of doing this when I began the project, but 
+- Organise my code into better, reusable components. I had all intentions of doing this when I began the project, but 
 due to getting stuck and just wanting to meet the mvp within as close to the time frame as possible, I didn't make 
 the changes. 
--> Present the previous submissions in a more user-friendly way. Currently, it's not super clear to read and could be 
+- Present the previous submissions in a more user-friendly way. Currently, it's not super clear to read and could be 
 organised better. Pagination would be something I'd look into to manage large quantities of submissions. 
--> The user would want their submissions to be secure and I imagine prviate, so looking into how to make the application 
+- The user would want their submissions to be secure and I imagine prviate, so looking into how to make the application 
 secure.
--> Feature - Ability to delete submissions 
--> Writing tests 
+- Feature - Ability to delete submissions 
+- Writing tests 
