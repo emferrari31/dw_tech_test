@@ -6,8 +6,8 @@ Users can submit new survey notes, as well as view and edit previous submissions
 ## Installation 
 1. Clone the repository 
 ```js
-git clone https://github.com/your-username/survey-app.git
-cd survey-app
+git clone https://github.com/emferrari31/survey-app.git
+    cd survey-app
 ```
 2. Install dependencies: Run the following command to install all necessary dependencies: 
 ```js
