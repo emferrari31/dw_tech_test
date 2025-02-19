@@ -1,50 +1,38 @@
-# React + TypeScript + Vite
+# Survey Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple survey application built with React, TypeScript and a Supabase API designed to manage survey submissions. 
+Users can submit new survey notes, as well as view and edit previous submissions. 
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
+## Installation 
+1. Clone the repository 
 ```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+git clone https://github.com/your-username/survey-app.git
+cd survey-app
+```
+2. Install dependencies: Run the following command to install all necessary dependencies: 
+```js
+npm install
+```
+3. Set up environment variables: Create a .env file in the root of the project and add the following:
+```js
+VITE_API_KEY=your_supabase_api_key
+```
+4. Run the development server: Start the application by running:
+```js
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+The application should now be running on http://localhost:3000. Open this URL in your browser.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Future Improvements 
+If I had more time on the project I would make the following adjustments: 
+-> Organise my code into better, reusable components. I had all intentions of doing this when I began the project, but 
+due to getting stuck and just wanting to meet the mvp within as close to the time frame as possible, I didn't make 
+the changes. 
+-> Present the previous submissions in a more user-friendly way. Currently, it's not super clear to read and could be 
+organised better. Pagination would be something I'd look into to manage large quantities of submissions. 
+-> The user would want their submissions to be secure and I imagine prviate, so looking into how to make the application 
+secure.
+-> Feature - Ability to delete submissions 
+-> Writing tests 

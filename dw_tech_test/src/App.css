@@ -2,7 +2,9 @@ body {
   background-color: #f1f6f8;
   padding-top: 40px;
   padding-bottom: 40px;
-
+  font-family: Arial;
+  line-height: 1.5;
+  color: #111136;
 }
 
 #root {
@@ -12,10 +14,34 @@ body {
   text-align: center;
   background-color: #c3d7f5;
   border-radius: 14px;
-  overflow-y: auto;
 }
 
 textarea {
   border-radius: 14px;
   padding: 8px;
+}
+
+.responsive-textarea {
+  width: 100%;
+  max-width: 800px;
+  min-width: 200px;
+  height: auto;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+@media only screen and (min-width: 600px) {
+  .responsive-textarea {
+    height: 200px;
+  }
 }

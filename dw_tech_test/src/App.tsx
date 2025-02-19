@@ -3,18 +3,17 @@ import './App.css';
 import Header from "./components/Header";
 import FormSurvey from "./components/FormSurvey";
 
-// Define the Survey type
 type Survey = {
     id: string;
     created_at: string;
     notes: string | null;
 };
 
-function App() {
+const App = () => {
     const [surveys, setSurveys] = useState<Survey[]>([]);
-    const [loading, setLoading] = useState(true); // For loading state
+    const [loading, setLoading] = useState(true);
+    const [editingSurvey, setEditingSurvey] = useState<Survey | null>(null);
 
-    // Fetch surveys on component mount
     useEffect(() => {
         const fetchSurveys = async () => {
             const url = 'https://mmyaxhazugbcfqmjryjz.supabase.co/rest/v1/survey';
@@ -27,46 +26,66 @@ function App() {
             });
 
             const surveyData = await response.json();
-            setSurveys(surveyData); // Assuming setSurveys is used to set survey data state
-            setLoading(false); // Set loading to false after fetching surveys
+            setSurveys(surveyData);
+            setLoading(false);
         };
 
         fetchSurveys();
-    }, []); // Fetch surveys only once when component mounts
+    }, []);
 
-    // Handle form submission and send the data to the API
-    const handleFormSubmit = async (data: { notes: string; date: string }) => {
+    const handleEditClick = (survey: Survey) => {
+        setEditingSurvey(survey);
+    };
+
+    const handleFormSubmit = async (data: { notes: string }) => {
         const url = 'https://mmyaxhazugbcfqmjryjz.supabase.co/rest/v1/survey';
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'apikey': import.meta.env.VITE_API_KEY,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                notes: data.notes,
-            }),
-        });
 
-        if (response.ok) {
-            const newSurvey = {
-                id: Date.now().toString(),
-                created_at: new Date().toISOString(),
-                notes: data.notes,
-            };
+        if (editingSurvey) {
+            // Editing existing survey
+            const response = await fetch(`${url}?id=eq.${editingSurvey.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'apikey': import.meta.env.VITE_API_KEY,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    notes: data.notes,
+                }),
+            });
 
-            setSurveys((prevSurveys) => [...prevSurveys, newSurvey]);
-            console.log('Survey submitted successfully');
+            if (response.ok) {
+                setSurveys((prevSurveys) =>
+                    prevSurveys.map((survey) =>
+                        survey.id === editingSurvey.id ? { ...survey, notes: data.notes } : survey
+                    )
+                );
+            }
+            setEditingSurvey(null);
         } else {
-            console.error('Failed to submit survey');
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'apikey': import.meta.env.VITE_API_KEY,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ notes: data.notes }),
+            });
+
+            if (response.ok) {
+                const newSurvey = {
+                    id: Date.now().toString(),
+                    created_at: new Date().toISOString(),
+                    notes: data.notes,
+                };
+                setSurveys((prevSurveys) => [...prevSurveys, newSurvey]);
+            }
         }
     };
 
     return (
         <>
             <Header />
-            <FormSurvey onSubmit={handleFormSubmit} />
-
+            <FormSurvey onSubmit={handleFormSubmit} editingSurvey={editingSurvey} />
             {loading ? (
                 <p>Loading surveys...</p>
             ) : (
@@ -74,9 +93,9 @@ function App() {
                     {surveys.length > 0 ? (
                         surveys.map((survey) => (
                             <div key={survey.id}>
-                                <p><strong>Notes:</strong> {survey.notes || 'No notes available'}</p>
+                                <p><strong>Notes:</strong> <br />{survey.notes || 'No notes available'}</p>
                                 <p><strong>Created at:</strong> {survey.created_at}</p>
-                                <p><strong>Date:</strong> {survey.date}</p> {/* Display the date */}
+                                <button onClick={() => handleEditClick(survey)}>Edit</button>
                             </div>
                         ))
                     ) : (
@@ -86,6 +105,6 @@ function App() {
             )}
         </>
     );
-}
+};
 
 export default App;
